@@ -15,7 +15,6 @@ export const handler = middy()
     const userId = getUserId(event)
     const todoId = event.pathParameters.todoId
     const url = await createAttachmentPresignedUrl(userId, todoId)
-    
     return {
       headers: {
         'Access-Control-Allow-Origin': '*',

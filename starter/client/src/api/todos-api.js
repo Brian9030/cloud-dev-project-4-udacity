@@ -20,7 +20,6 @@ export async function createTodo(idToken, newTodo) {
   const response = await Axios.post(
     `${process.env.REACT_APP_API_ENDPOINT}/todos`,
     JSON.stringify(newTodo),
-    
     {
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +34,6 @@ export async function patchTodo(idToken, todoId, updatedTodo) {
   await Axios.patch(
     `${process.env.REACT_APP_API_ENDPOINT}/todos/${todoId}`,
     JSON.stringify(updatedTodo),
-
     {
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +56,6 @@ export async function getUploadUrl(idToken, todoId) {
   const response = await Axios.post(
     `${process.env.REACT_APP_API_ENDPOINT}/todos/${todoId}/attachment`,
     '',
-
     {
       headers: {
         'Content-Type': 'application/json',

@@ -14,7 +14,6 @@ export const handler = middy()
   .handler(async (event) => {
     const userId = getUserId(event)
     const todos = await getTodosForUser(userId)
-    
     return {
       statusCode: 200,
       body: JSON.stringify({ items: todos })

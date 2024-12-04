@@ -1,7 +1,8 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: hoangquan2312
+org: brian9030
+
 # "app" enables Serverless Framework Dashboard features and sharing them with other Services.
-app: serverless-todo-app
+app: todo-app
 service: serverless-todo-app
 
 plugins:
@@ -14,11 +15,11 @@ provider:
   region: ${opt:region, 'us-east-1'}
   profile: serverless
   environment:
-    TODOS_TABLE: serverless-todo-app-${self:provider.stage}
+    TODOS_TABLE: todo-app-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: todo-bucket-huytn19-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: images-brian9030-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    PROJECT_NAME: "serverless-todo-app"
+    PROJECT_NAME: "todo-app"
     INDEX_NAME: ${self:provider.environment.TODOS_CREATED_AT_INDEX}
 
   logs:
@@ -55,13 +56,13 @@ functions:
     handler: src/lambda/http/createTodo.handler
     events:
       - http:
+          authorizer: Auth
           method: post
           path: todos
           cors: true
-          authorizer: Auth
           request:
-            schema:
-              'application/json': ${file(models/create-todo-model.json)}
+            schemas:
+              application/json: ${file(src/schemas/CreateTodoRequest.json)}
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -76,13 +77,13 @@ functions:
     handler: src/lambda/http/updateTodo.handler
     events:
       - http:
+          authorizer: Auth
           method: patch
           path: todos/{todoId}
           cors: true
-          authorizer: Auth
           request:
-            schema:
-              'application/json': ${file(models/update-todo-model.json)}
+            schemas:
+              application/json: ${file(src/schemas/UpdateTodoRequest.json)}
     iamRoleStatements:
       - Effect: Allow
         Action:

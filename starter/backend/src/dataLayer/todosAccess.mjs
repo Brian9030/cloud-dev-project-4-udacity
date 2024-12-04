@@ -73,7 +73,6 @@ export class TodosAccess {
         todoId
       }
     })
-    
     return 'success'
   }
   async getUploadUrl(todoId, userId) {
@@ -81,7 +80,6 @@ export class TodosAccess {
         Bucket: process.env.ATTACHMENT_S3_BUCKET,
         Key: todoId
       })
-
     const uploadUrl = await getSignedUrl(this.s3Client, command, {
     expiresIn: process.env.SIGNED_URL_EXPIRATION
     })

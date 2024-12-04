@@ -15,7 +15,6 @@ export const handler = middy()
     const todoId = event.pathParameters.todoId
     const userId = getUserId(event)
     await DeleteTodo(userId, todoId)
-    
     return {
       headers: {
         'Access-Control-Allow-Origin': '*',

@@ -9,7 +9,6 @@ export const handler = middy()
   .use(
     cors({
       credentials: true
-      
     })
   )
   .handler(async (event) => {
@@ -17,7 +16,6 @@ export const handler = middy()
     const updatedTodo = JSON.parse(event.body)
     const userId = getUserId(event)
     await UpdateTodo(userId, todoId, updatedTodo)
-
     return {
       headers: {
         'Access-Control-Allow-Origin': '*',

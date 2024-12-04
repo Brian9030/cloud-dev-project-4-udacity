@@ -24,7 +24,7 @@ export async function CreateTodo(newItem, userId) {
 }
 
 export async function getTodosForUser(userId) {
-  logger.info('Call function get all todos')
+  logger.info('Call function getall todos')
   return await todosAccess.getAll(userId)
 }
 

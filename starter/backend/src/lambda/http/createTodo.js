@@ -15,7 +15,6 @@ export const handler = middy()
     const newTodo = JSON.parse(event.body)
     const userId = getUserId(event)
     const newItem = await CreateTodo(newTodo, userId)
-    
     return {
       headers: {
         'Access-Control-Allow-Origin': '*',

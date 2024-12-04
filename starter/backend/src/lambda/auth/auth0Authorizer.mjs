@@ -4,7 +4,7 @@ import { createLogger } from '../../utils/logger.mjs'
 
 const logger = createLogger('auth')
 
-const jwksUrl = 'https://dev-830n79njkscnq3gd.us.auth0.com/.well-known/jwks.json'
+const jwksUrl = 'https://dev-zl2357u4e8tqaqf5.us.auth0.com/.well-known/jwks.json'
 
 export async function handler(event) {
   try {
@@ -57,7 +57,6 @@ async function verifyToken(authHeader) {
   const pemDT = signingKey.x5c[0];
   const secret = `-----BEGIN CERTIFICATE-----\n${pemDT}\n-----END CERTIFICATE-----\n`;;
   const isTokenValid = jsonwebtoken.verify(token, secret, {algorithms: ['RS256']});
-  
   logger.info('Verify token', isTokenValid);
   return isTokenValid;
 } 
